@@ -39,6 +39,10 @@ io.sockets.on('connection', function (socket) {
     socket.broadcast.emit('playerMoved', data);
   });
 
+  socket.on('disconnect', function(){
+    socket.broadcast.emit('playerLeft',id);
+  });
+
 
 
 
