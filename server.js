@@ -8,11 +8,9 @@ var curPlayer = [];
 
 function Player(id) {
   this.id = id;
-  this.pos = {
-    x: 0,
-    y: 0,
-    z: 0
-  };
+  this.x = 0;
+  this.y = 0;
+  this.z = 0;
   this.entity = null;
 }
 
@@ -20,6 +18,7 @@ function Player(id) {
 
 io.sockets.on('connection', function (socket) {
   socket.on('initialize', function(){
+    console.log("New User connected and initialized!");
     var id = socket.id;
     var newPlayer = new Player(id);
 
@@ -40,7 +39,7 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('disconnect', function(){
-    socket.broadcast.emit('playerLeft',id);
+    socket.broadcast.emit('playerLeft',this.id);
   });
 
 
